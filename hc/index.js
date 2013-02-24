@@ -33,6 +33,10 @@ app.configure(function(){
 	    key: "hatchcatch",
 	    store: sessionStore
 	  }));
+  app.use(function(req,res,next){
+        req.client = client;
+        next();
+  });
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);

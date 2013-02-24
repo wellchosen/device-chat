@@ -2,14 +2,14 @@ var config = module.exports = {
 
 		auth: {
 			    twitter: {
-			      consumerkey : "LEMDKdQ4NXGOddvSjJOtBQ",
-			      consumersecret : "44dQ4l0dlLyXAYjf09m4pLTUPt1J9sysFeXmhKJDA",
-			      callback : "http://localhost/v1/authfb/callback"
+			      consumerkey : "sP5LDNIF1x975XTcqUerg",
+			      consumersecret : "pHYRHZ3h6sqmKmgXcP6GSus3Ol7CQHNf82U3xK5I",
+			      callback : "http://172.20.10.8/v1/authfb/callback"
 			    },
 			    facebook: {
-			      clientid : "447241648681212",
-			      clientsecret : "0425c311c7896527fa7cab47731ee8c1",
-			      callback : "http://localhost/v1/authfb/callback"
+			      clientid : "511896482182702",
+			      clientsecret : "325932d8cb9394a0d4ded317daa44c3e",
+			      callback : "http://172.20.10.8/v1/authfb/callback"
 			    }
 		}
 };

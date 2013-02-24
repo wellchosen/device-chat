@@ -1,4 +1,3 @@
-var client = module.parent.exports.client;
 
 function getRooms(client,fn){
 	client.smembers("hc:partner:rooms", function(err, rooms) {
@@ -81,7 +80,7 @@ module.exports = function(req,res){
 	
 	req.user.gender = req.body['gender-m'] || req.body['gender-f'] || req.user.gender;
 	req.user.code_name = req.body.username;
-	accomodateVisitor(client,req.user,function(room){
+	accomodateVisitor(req.client,req.user,function(room){
 		console.log(room);
 		if(room){
 			res.render('chat',{users:req.user, room:room});
