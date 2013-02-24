@@ -3,6 +3,7 @@ function getRooms(client,fn){
 	client.smembers("hc:partner:rooms", function(err, rooms) {
 		if (!err && rooms) fn(rooms);
 		else fn([]);
+		console.log(rooms);
 	});
 }
 
@@ -40,7 +41,7 @@ function accomodateVisitor(client,visitor,fn){
 						});
 					}
 					else if(visitors.length == 1){
-						if(visitors[0].gender != visitor.gender){
+						if(JSON.parse(visitors[0]).gender != visitor.gender){
 							setRoomVisitor(client,room,visitor,function(replies){
 								fn( room ); return;
 							});
@@ -51,7 +52,7 @@ function accomodateVisitor(client,visitor,fn){
 					}
 				});
 			});
-			if(rooms.length == 15){
+			if(rooms.length == 2){
 				fn( false ); return;
 			}
 			else{
@@ -80,13 +81,13 @@ module.exports = function(req,res){
 	
 	req.user.gender = req.body['gender-m'] || req.body['gender-f'] || req.user.gender;
 	req.user.code_name = req.body.username;
-	accomodateVisitor(req.client,req.user,function(room){
+	accomodateVisitor(req.client,JSON.stringify(req.user),function(room){
 		console.log(room);
 		if(room){
 			res.render('chat',{users:req.user, room:room});
 		}
 		else{
-			res.render('option');
+			res.redirect('/option');
 		}
 	});
 	

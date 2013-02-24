@@ -7,8 +7,8 @@ var config = module.exports = {
 			      callback : "http://172.20.10.8/v1/authfb/callback"
 			    },
 			    facebook: {
-			      clientid : "511896482182702",
-			      clientsecret : "325932d8cb9394a0d4ded317daa44c3e",
+			      clientid : "329613163813777",
+			      clientsecret : "05fd646b7ba719c7a64a6f2608d4fc86",
 			      callback : "http://172.20.10.8/v1/authfb/callback"
 			    }
 		}
