@@ -9,13 +9,13 @@ var express = require('express')
   , path = require('path')
   , config = require('./config/local.js')
   , expressValidator = require('express-validator')
-  , redis = require('redis')
+  , chat_object = require('./models/chat.object.js')
   , RedisStore = require('connect-redis')(express);
 
 require('./config/strategy');
 
-var client = exports.client  = redis.createClient();
-var sessionStore = exports.sessionStore = new RedisStore({client: client});
+var client = exports.client  = module.parent.exports.client;
+var sessionStore = exports.sessionStore =  module.parent.exports.sessionStore;
 
 var app = module.exports = express();
 
@@ -28,14 +28,14 @@ app.configure(function(){
   app.use(config.local);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
+  app.use(express.cookieParser(config.session.secret));
   app.use(express.session({
 	    key: "hatchcatch",
 	    store: sessionStore
 	  }));
   app.use(function(req,res,next){
-        req.client = client;
-        next();
+	  req.client = client;
+	  next();
   });
   app.use(passport.initialize());
   app.use(passport.session());
@@ -67,8 +67,10 @@ app.get('/:version/authtw/callback',
 );
 
 app.get('/:version/logout', function(req, res){
+	  chat_object.removeVisitor(client,req.user.room,req.user,function(reply){
+		  
+	  });
 	  req.logout();
-	  res.redirect('/:version/login');
+	  res.redirect('/v1/login');
 });
-
 
